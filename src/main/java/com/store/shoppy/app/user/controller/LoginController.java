@@ -23,6 +23,7 @@ import com.store.shoppy.libraries.payload.response.BaseResponse;
 public class LoginController {
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     private Gson gson = new Gson();
+    final int EXPIRE_TIME = 8 * 60 * 60 * 1000;
 
     @Autowired
     private JWTHelper jwtHelper;
@@ -42,12 +43,13 @@ public class LoginController {
         String listRoleJSon  = gson.toJson(collectRoles);
         System.out.println("List role: "+listRoleJSon);
 
-        String jwtToken = jwtHelper.generateJwsToken(listRoleJSon);
+
+        String userJwtToken = jwtHelper.generateJwsToken(listRoleJSon, EXPIRE_TIME);
 
         BaseResponse baseResponse = new BaseResponse(
                 HttpStatus.OK.value(),
                 "Login success",
-                jwtToken
+                userJwtToken
         );
 
         logger.info("Response: " + baseResponse);

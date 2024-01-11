@@ -16,21 +16,19 @@ public class JWTHelper {
     @Value("${keyToken}")
     private String strKey;
 
-    final int EXPIRE_TIME = 8 * 60 * 60 * 1000;
-
     public String generateJWTSecretKey(){
         SecretKey key = Jwts.SIG.HS256.key().build();
         return Encoders.BASE64.encode(key.getEncoded());
     }
 
-    public String generateJwsToken(String data) {
+    public String generateJwsToken(String data, int expireTime) {
 
         // Convert to byte-array type object from base64 secret key
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(strKey));
 
         // Set expire time
         Date date = new Date();
-        long futureMiliSecond = date.getTime() + EXPIRE_TIME;
+        long futureMiliSecond = date.getTime() + expireTime;
         Date futureDate = new Date(futureMiliSecond);
 
         // Create JWT token
