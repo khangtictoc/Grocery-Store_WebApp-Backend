@@ -19,7 +19,16 @@ public class ProductController {
     private ProductServiceImp productServiceImp;
 
     @PostMapping("insert")
-    public ResponseEntity<?> insertProduct(@RequestParam MultipartFile file,@RequestParam String name,@RequestParam float price ,@RequestParam float originalPrice,@RequestParam float discountPercent ,@RequestParam int idCategory,@RequestParam(required = false) String unit,@RequestParam int quantity,@RequestParam double averageRating,@RequestParam(required = false) String description){
+    public ResponseEntity<?> insertProduct(@RequestParam MultipartFile file,
+                                           @RequestParam String name,
+                                           @RequestParam float price ,
+                                           @RequestParam float originalPrice,
+                                           @RequestParam float discountPercent ,
+                                           @RequestParam int idCategory,
+                                           @RequestParam(required = false) String unit,
+                                           @RequestParam int quantity,
+                                           @RequestParam double averageRating,
+                                           @RequestParam(required = false) String description){
         productServiceImp.save(file, name, price, originalPrice, discountPercent, idCategory, unit, quantity, averageRating, description);
         return new ResponseEntity<>("insert product successfully", HttpStatus.OK);
     }

@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/category","/file/**","/error","/user/**", "/jwt/**").permitAll()
+                        .requestMatchers("/category","/file/**","/error","/user/**", "/jwt/**", "/product/**").permitAll()
                 )
                 .build();
     }

@@ -1,4 +1,4 @@
-package com.store.shoppy.app.product.controller;
+package com.store.shoppy.libraries.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -11,19 +11,19 @@ import com.store.shoppy.app.product.service.imp.FileServiceImp;
 @CrossOrigin
 @RestController
 @RequestMapping("/file")
-public class ProductImgController {
+public class FileController {
 
     @Autowired
     FileServiceImp fileServiceImp;
 
     @GetMapping("/{filename}")
     public ResponseEntity<?> downloadFile(@PathVariable String filename){
-        try{
+        try {
             Resource resource = fileServiceImp.load(filename);
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename =\"" + filename + "\"")
                     .body(resource);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new RuntimeException("loi khong tim thay file name, vui long nhap day du ten file + extension");
         }
     }
