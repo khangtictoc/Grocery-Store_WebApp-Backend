@@ -41,7 +41,7 @@ public class LoginController {
 
         Collection<?> collectRoles = authentication.getAuthorities();
         String listRoleJSon  = gson.toJson(collectRoles);
-        System.out.println("List role: "+listRoleJSon);
+        System.out.println("List role: " + listRoleJSon);
 
 
         String userJwtToken = jwtHelper.generateJwsToken(listRoleJSon, EXPIRE_TIME);

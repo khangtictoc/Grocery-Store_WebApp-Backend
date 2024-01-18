@@ -35,8 +35,6 @@ public class CategoryController {
 
     @GetMapping("getall")
     public ResponseEntity<?> getAllCategory(){
-
-
         List<CategoryEntity> listCategory = categoryServiceImp.findAll();
         List<CategoryDTO> listCategoryDTO = new ArrayList<>();
 
