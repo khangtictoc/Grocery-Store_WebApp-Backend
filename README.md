@@ -1,1 +1,1 @@
-# Shoppy WebApp
+# GroceryStore WebApp
