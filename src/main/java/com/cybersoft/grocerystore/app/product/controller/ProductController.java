@@ -1,15 +1,18 @@
 package com.cybersoft.grocerystore.app.product.controller;
 
+import com.cybersoft.grocerystore.app.product.entity.ProductEntity;
 import com.cybersoft.grocerystore.app.product.service.imp.ProductServiceImp;
+import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -32,4 +35,21 @@ public class ProductController {
         return new ResponseEntity<>("insert product successfully", HttpStatus.OK);
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable int id){
+        ProductEntity product =productServiceImp.getProductById(id);
+
+        BaseResponse baseResponse = new BaseResponse(200,"",product);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
+    @GetMapping("getall")
+    public ResponseEntity<?> getAllProduct(){
+        List<ProductEntity> listProduct =productServiceImp.getAllProducts();
+
+        BaseResponse baseResponse = new BaseResponse(200,"",listProduct);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
 }

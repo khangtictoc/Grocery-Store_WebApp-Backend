@@ -3,6 +3,7 @@ package com.cybersoft.grocerystore.app.product.entity;
 
 import com.cybersoft.grocerystore.app.category.entity.CategoryEntity;
 import com.cybersoft.grocerystore.app.order.entity.OrderDetailEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name="id_category")
     private CategoryEntity category;
@@ -51,6 +52,7 @@ public class ProductEntity {
     @Column(name="is_activated")
     private boolean isActivated = true;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<OrderDetailEntity> orderDetails;
 
