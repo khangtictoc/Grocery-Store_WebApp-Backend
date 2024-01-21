@@ -56,6 +56,7 @@ CREATE TABLE `checkout` (
   `landmark` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `created_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `list_id_order` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_id_user_checkout` (`id_user`),
   CONSTRAINT `FK_id_user_checkout` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
@@ -68,7 +69,7 @@ CREATE TABLE `checkout` (
 
 LOCK TABLES `checkout` WRITE;
 /*!40000 ALTER TABLE `checkout` DISABLE KEYS */;
-INSERT INTO `checkout` VALUES (1,1,'Home',20,'Nguyễn Văn A','090900101010','Landmark 81','Hồ Chí Mình','2024-01-06 09:16:28');
+INSERT INTO `checkout` VALUES (1,1,'Home',20,'Nguyễn Văn A','090900101010','Landmark 81','Hồ Chí Mình','2024-01-06 09:16:28','1,2');
 /*!40000 ALTER TABLE `checkout` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,6 +87,7 @@ CREATE TABLE `order_detail` (
   `purchase_price` float DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `created_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_checked` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_id_product_order_detail` (`id_product`),
   KEY `FK_id_user_order_detail` (`id_user`),
@@ -100,7 +102,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,1,1,3,5,'2024-01-06 09:13:57'),(2,2,1,5,1,'2024-01-06 09:14:12');
+INSERT INTO `order_detail` VALUES (1,1,1,3,5,'2024-01-06 09:13:57',1),(2,2,1,5,1,'2024-01-06 09:14:12',1);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +134,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,1,'COD',NULL,'2024-01-06 09:35:47',0);
+INSERT INTO `payment` VALUES (1,1,'COD',NULL,'2024-01-06 09:35:47',1);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +161,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `FK_id_category_product` (`id_category`),
   CONSTRAINT `FK_id_category_product` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +170,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,1,NULL,'Knor Instant Soup','100 Gram',3,5000,4.5,NULL,5,NULL,1),(2,1,NULL,'Chings Noodles ','75 Gram',5,8,4.7,NULL,8,NULL,1),(3,1,'FIDS_PhuQuocAirport.png','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic ',30000,0.1,0),(4,1,'FIDS_PhuQuocAirport.png','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic ',30000,0.1,0),(5,1,'FIDS_PhuQuocAirport.png','ProductA','1 kg',25000,1000,4.5,NULL,30000,0.1,0),(6,1,'FIDS_PhuQuocAirport.png','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic 1',30000,0.1,0),(7,1,'NhaTrang.jpg','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic 1',30000,0.1,0),(8,1,'NhaTrang.jpg','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic 1',30000,0.1,0),(9,1,'NhaTrang.jpg','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic 1',30000,0.1,1),(10,1,'FIDS_PhuQuocAirport.png','ProductA','1 kg',25000,1000,4.5,'Sản phẩm organic 1',30000,0.05,1),(11,1,'FIDS_PhuQuocAirport.png','ProductB','1 kg',26000,1000,4.5,'Sản phẩm organic 1',30000,0.05,1);
+INSERT INTO `products` VALUES (1,1,NULL,'Knor Instant Soup','100 Gram',3,5000,4.5,NULL,5,NULL,1),(2,1,NULL,'Chings Noodles ','75 Gram',5,8,4.7,NULL,8,NULL,1);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +259,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'nguyenvana@gmail.com','$2a$12$ierwwFEE1T2rfNwUyvDLfe4He7QYYg1Bdii.32aD7w42Javo7Zs2C',1,'Nguyễn Văn A',NULL,NULL,1,'2024-01-06 09:13:00');
+INSERT INTO `users` VALUES (1,NULL,'nguyenvana@gmail.com','$2a$12$ierwwFEE1T2rfNwUyvDLfe4He7QYYg1Bdii.32aD7w42Javo7Zs2C',2,'Nguyễn Văn A',NULL,NULL,1,'2024-01-06 09:13:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-11 15:27:23
+-- Dump completed on 2024-01-15 23:32:51
