@@ -28,7 +28,7 @@ import com.cybersoft.grocerystore.libraries.jwt.JWTHelper;
 import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
 import com.cybersoft.grocerystore.app.user.dto.JwtDTO;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/user")
 public class LoginController {
@@ -88,6 +88,27 @@ public class LoginController {
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request){
+        String authHeader = request.getHeader("Authorization");
+        String token = authHeader.split(" ")[1];
+        /**
+         * TODO: Delete token from database
+         * TODO: Check valid token
+         */
+        System.out.println("Dev log: Token da xoa");
+
+        BaseResponse baseResponse = new BaseResponse(
+                HttpStatus.OK.value(),
+                "User successfully logged out!",
+                "Token deleted!"
+        );
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
 
     @GetMapping("/hello")
     public ResponseEntity<?> hello(){
