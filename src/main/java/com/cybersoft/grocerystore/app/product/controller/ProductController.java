@@ -1,9 +1,11 @@
 package com.cybersoft.grocerystore.app.product.controller;
 
+import com.cybersoft.grocerystore.app.product.dto.ProductDTO;
 import com.cybersoft.grocerystore.app.product.entity.ProductEntity;
 import com.cybersoft.grocerystore.app.product.service.imp.ProductServiceImp;
 import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
 import com.fasterxml.jackson.databind.ser.Serializers;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +39,9 @@ public class ProductController {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getProductById(@PathVariable int id){
-        ProductEntity product =productServiceImp.getProductById(id);
+        ProductDTO productDTO =productServiceImp.getProductById(id);
 
-        BaseResponse baseResponse = new BaseResponse(200,"",product);
+        BaseResponse baseResponse = new BaseResponse(200,"",productDTO);
 
         return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
@@ -52,4 +54,16 @@ public class ProductController {
 
         return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
+
+    @GetMapping("getbestsalerproductsbycategory")
+    public ResponseEntity<?> getBestSellerProductsByCategory(@RequestParam int idCategory, @RequestParam int topNumber){
+
+        List<ProductDTO> listProduct = productServiceImp.getBestSellerProductsByCategory(idCategory, topNumber);
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(listProduct);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
 }

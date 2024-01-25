@@ -4,6 +4,7 @@ import com.cybersoft.grocerystore.app.order.entity.OrderDetailEntity;
 import com.cybersoft.grocerystore.app.card.entity.UserCardEntity;
 import com.cybersoft.grocerystore.app.checkout.entity.CheckOutEntity;
 import com.cybersoft.grocerystore.app.role.entity.RoleEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,7 +29,7 @@ public class UserEntity {
     @Column(name="password")
     private String password;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name="id_role")
     private RoleEntity role;
@@ -48,12 +49,15 @@ public class UserEntity {
     @Column(name="created_datetime")
     private Date createdDatetime;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<CheckOutEntity> payments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<UserCardEntity> userCards;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<OrderDetailEntity> orderDetails;
 

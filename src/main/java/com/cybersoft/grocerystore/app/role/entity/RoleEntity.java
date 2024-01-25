@@ -1,6 +1,7 @@
 package com.cybersoft.grocerystore.app.role.entity;
 
 import com.cybersoft.grocerystore.app.user.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class RoleEntity {
     @Column(name="description")
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     private List<UserEntity> users;
 

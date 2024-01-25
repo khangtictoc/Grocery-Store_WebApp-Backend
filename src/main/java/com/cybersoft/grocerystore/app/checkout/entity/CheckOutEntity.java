@@ -2,6 +2,7 @@ package com.cybersoft.grocerystore.app.checkout.entity;
 
 import com.cybersoft.grocerystore.app.payment.entity.PaymentEntity;
 import com.cybersoft.grocerystore.app.user.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -44,6 +45,7 @@ public class CheckOutEntity {
     @Column(name="list_id_order")
     private String listIdOrder;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "checkOut")
     private List<PaymentEntity> payments;
 

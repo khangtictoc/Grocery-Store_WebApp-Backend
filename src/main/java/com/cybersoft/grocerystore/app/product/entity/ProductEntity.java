@@ -17,7 +17,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne()
     @JoinColumn(name="id_category")
     private CategoryEntity category;
