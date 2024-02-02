@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cybersoft.grocerystore.app.product.repository.ProductRepository;
 
+import java.util.List;
+
 @Service
 public class ProductService implements ProductServiceImp {
 
@@ -47,5 +49,16 @@ public class ProductService implements ProductServiceImp {
         }catch(Exception e){
             throw new RuntimeException("Loi insert product: "+e.getMessage());
         }
+    }
+    @Override
+    public List<ProductEntity> findAll() {
+        return productRepository.findAll();
+    }
+
+    public List<ProductEntity> findAllByOrderByQuantity() {
+        return productRepository.findAllByOrderByQuantity();
+    }
+    public List<Integer> findAllGroupByProduct() {
+        return productRepository.findAllGroupByProduct();
     }
 }

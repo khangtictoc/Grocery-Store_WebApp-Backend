@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryServiceImp {
     List<CategoryEntity> findAll();
+    List<Integer> findAllCategoryOrderByBestSeller();
 }

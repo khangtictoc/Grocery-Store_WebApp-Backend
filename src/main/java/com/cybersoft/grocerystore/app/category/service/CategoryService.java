@@ -17,4 +17,7 @@ public class CategoryService implements CategoryServiceImp {
     public List<CategoryEntity> findAll() {
         return categoryRepository.findAll();
     }
+    public List<Integer> findAllCategoryOrderByBestSeller() {
+        return categoryRepository.findAllCategoryOrderByBestSeller();
+    }
 }

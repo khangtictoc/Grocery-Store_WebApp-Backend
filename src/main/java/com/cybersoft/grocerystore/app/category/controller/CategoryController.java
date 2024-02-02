@@ -58,5 +58,38 @@ public class CategoryController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 
     }
+    @GetMapping("getallOrderBySold")
+    public ResponseEntity<?> getallOrderBySold(){
 
+        List<Integer> listIdOrderBySold = categoryServiceImp.findAllCategoryOrderByBestSeller();
+        List<CategoryEntity> listCategory = categoryServiceImp.findAll();
+        List<CategoryDTO> listCategoryDTO = new ArrayList<>();
+        for(int categoryIdOrderBySold : listIdOrderBySold){
+            System.out.println("abavava"+categoryIdOrderBySold);
+            for(CategoryEntity categoryItem : listCategory){
+                if(categoryItem.getId()==categoryIdOrderBySold)
+                {
+                    CategoryDTO categoryDTO = new CategoryDTO();
+
+                    categoryDTO.setId(categoryItem.getId());
+                    categoryDTO.setCategoryName(categoryItem.getName());
+
+                    listCategoryDTO.add(categoryDTO);
+                }
+
+            }
+        }
+
+
+        BaseResponse baseResponse = new BaseResponse(
+                200,
+                "Retrieve all category successfully",
+                listCategoryDTO
+        );
+
+        logger.info("Kiem tra: "+baseResponse);
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+
+    }
 }
