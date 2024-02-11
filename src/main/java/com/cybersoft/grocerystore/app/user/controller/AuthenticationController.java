@@ -4,6 +4,9 @@ package com.cybersoft.grocerystore.app.user.controller;
 import com.cybersoft.grocerystore.app.user.config.gson.GrantedAuthorityTypeAdaptor;
 import com.cybersoft.grocerystore.app.user.config.gson.UserIdentityDTODeserializer;
 import com.cybersoft.grocerystore.app.user.dto.UserIdentityDTO;
+import com.cybersoft.grocerystore.app.user.entity.UserEntity;
+import com.cybersoft.grocerystore.app.user.repository.UserRepository;
+import com.cybersoft.grocerystore.app.user.service.SignupService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,10 +32,11 @@ import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
 import com.cybersoft.grocerystore.app.user.dto.JwtDTO;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
-public class LoginController {
-    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+public class AuthenticationController {
+    private Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     private Gson gson = new GsonBuilder()
             .registerTypeAdapter(UserIdentityDTO.class, new UserIdentityDTODeserializer())
             .registerTypeAdapter(GrantedAuthority.class, new GrantedAuthorityTypeAdaptor())
@@ -45,6 +49,11 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private SignupService signupService;
 
     @PostMapping("signin")
     public ResponseEntity<?> signin(HttpServletResponse response, @RequestParam String Username, @RequestParam String Password) throws IOException {
@@ -89,11 +98,8 @@ public class LoginController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request){
-        String authHeader = request.getHeader("Authorization");
-        String token = authHeader.split(" ")[1];
         /**
          * TODO: Delete token from database
          * TODO: Check valid token
@@ -109,16 +115,19 @@ public class LoginController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestParam String Username, @RequestParam String Password, @RequestParam String Email, @RequestParam String Phone){
+        signupService.signup(Username, Password, Email, Phone, 2);
 
-    @GetMapping("/hello")
-    public ResponseEntity<?> hello(){
         BaseResponse baseResponse = new BaseResponse(
                 HttpStatus.OK.value(),
-                "Hello",
-                "Hello world"
+                "Successfully signed up with provided information!",
+                "Sign up successfully!"
         );
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+
+
     }
 
 }

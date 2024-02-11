@@ -9,6 +9,12 @@ import java.util.List;
 @Data
 @Entity(name="roles")
 public class RoleEntity {
+    public RoleEntity() {
+
+    }
+    public RoleEntity(int id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +28,6 @@ public class RoleEntity {
 
     @OneToMany(mappedBy = "role")
     private List<UserEntity> users;
+
 
 }
