@@ -15,6 +15,16 @@ import jakarta.persistence.Entity;
 @Data
 @Entity(name="users")
 public class UserEntity {
+    public UserEntity() {
+
+    }
+    public UserEntity(String username,  String password, String email, String phoneNumber, int idRole) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.role = new RoleEntity(idRole);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +70,6 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<OrderDetailEntity> orderDetails;
+
 
 }

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.cybersoft.grocerystore.libraries.filter.JwtFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -43,8 +44,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/category/**","/file/**","/error","/user/**", "/jwt/**", "/product/**","/payment/**","/order/**").permitAll()
+                        .requestMatchers("/category","/file/**","/error", "/jwt/**", "/product/**", "/user/signin", "/user/signup").permitAll()
+                        .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
+                        .anyRequest().authenticated()
                 )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

@@ -39,11 +39,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             // SimpleGrantedAuthority la lop con cua GrantedAuthority
             SimpleGrantedAuthority role = new SimpleGrantedAuthority(userEntity.getRole().getName());
             listRoles.add(role);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("","",listRoles);
+            String principal = userEntity.getEmail();
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal,"",listRoles);
             return authenticationToken;
         }
 
-        System.out.println("CustomerAuthenProvider authenticate failed");
+        System.out.println("Authentication has failed");
         return null;
     }
 
