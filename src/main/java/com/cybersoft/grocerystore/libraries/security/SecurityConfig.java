@@ -47,7 +47,6 @@ public class SecurityConfig {
                         .requestMatchers("/category","/file/**","/error", "/jwt/**", "/product/**", "/user/signin", "/user/signup").permitAll()
                         .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
-
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

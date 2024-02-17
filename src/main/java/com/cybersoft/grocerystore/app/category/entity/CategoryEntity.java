@@ -1,6 +1,7 @@
 package com.cybersoft.grocerystore.app.category.entity;
 
 import com.cybersoft.grocerystore.app.product.entity.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class CategoryEntity {
     @Column(name="name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<ProductEntity> products;
 
