@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/file/**","/error", "/jwt/**",
-                                "/product",
+                                "/product/getbestsalerproductsbycategory", "/product/id/*",
                                 "/user/signin", "/user/signup",
                                 "/category/getall")
                         .permitAll()
