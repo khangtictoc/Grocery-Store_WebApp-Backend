@@ -2,6 +2,7 @@ package com.cybersoft.grocerystore.app.product.controller;
 
 import com.cybersoft.grocerystore.app.product.dto.ProductDTO;
 import com.cybersoft.grocerystore.app.product.entity.ProductEntity;
+import com.cybersoft.grocerystore.app.product.repository.ProductRepository;
 import com.cybersoft.grocerystore.app.product.service.imp.ProductServiceImp;
 import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
 
@@ -26,6 +27,9 @@ public class ProductController {
 
     @Autowired
     private ProductServiceImp productServiceImp;
+
+    @Autowired
+    private ProductRepository productRepository;
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
     @PostMapping("insert")
     public ResponseEntity<?> insertProduct(@RequestParam MultipartFile file,
@@ -45,7 +49,7 @@ public class ProductController {
     public ResponseEntity<?> getAllByCategory(@RequestParam int categoryId){
 
 
-        List<ProductEntity> listProduct = productServiceImp.findAll();
+        List<ProductEntity> listProduct = productRepository.findAll();
         List<ProductDTO> listProductDTO = new ArrayList<>();
 
         for(ProductEntity productItem : listProduct){
@@ -83,8 +87,8 @@ public class ProductController {
     public ResponseEntity<?> getAllOrderByQuantity(){
 
 
-        List<Integer> ListOrderGroupBy = productServiceImp.findAllGroupByProduct();
-        List<ProductEntity> listProduct = productServiceImp.findAllByOrderByQuantity();
+        List<Integer> ListOrderGroupBy = productRepository.findAllGroupByProduct();
+        List<ProductEntity> listProduct = productRepository.findAllByOrderByQuantity();
         List<ProductDTO> listProductDTO = new ArrayList<>();
         for(int productIdOrderByQuantity : ListOrderGroupBy){
             for(ProductEntity productItem : listProduct){

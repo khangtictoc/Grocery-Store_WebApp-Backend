@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cybersoft.grocerystore.app.product.repository.ProductRepository;
 
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -65,16 +65,6 @@ public class ProductService implements ProductServiceImp {
         }
     }
 
-    @Override
-    public List<ProductEntity> findAll() {
-        return productRepository.findAll();
-    }
-
-    public List<ProductEntity> findAllByOrderByQuantity() {
-        return productRepository.findAllByOrderByQuantity();
-    }
-    public List<Integer> findAllGroupByProduct() {
-        return productRepository.findAllGroupByProduct();
 
 
     @Override
@@ -88,15 +78,15 @@ public class ProductService implements ProductServiceImp {
 
             ProductDTO productDTO = new ProductDTO();
 
-            productDTO.setProductId(product.getId());
-            productDTO.setProductName(product.getName());
-            productDTO.setProductUnit(product.getUnit());
-            productDTO.setProductDescription(product.getDescription());
-            productDTO.setProductPrice(product.getPrice());
+            productDTO.setId(product.getId());
+            productDTO.setName(product.getName());
+            productDTO.setUnit(product.getUnit());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
 
             if(product.getImage() != null && !product.getImage().isBlank()){
                 Resource resource = fileServiceImp.load(product.getImage());
-                productDTO.setProductImage( request.getScheme()+"://"+request.getHeader("host") +"/file/"+ resource.getFilename());
+                productDTO.setImage( request.getScheme()+"://"+request.getHeader("host") +"/file/"+ resource.getFilename());
             }
 
             return productDTO;
@@ -169,16 +159,16 @@ public class ProductService implements ProductServiceImp {
 
         for(ProductEntity product: tempProducts){
             ProductDTO productDTO = new ProductDTO();
-            productDTO.setProductId(product.getId());
-            productDTO.setProductName(product.getName());
-            productDTO.setProductPrice(product.getPrice());
-            productDTO.setProductUnit(product.getUnit());
-            productDTO.setProductDescription(product.getDescription());
-            productDTO.setCategoryName(product.getCategory().getName());
+            productDTO.setId(product.getId());
+            productDTO.setName(product.getName());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setUnit(product.getUnit());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setName(product.getCategory().getName());
 
             if(product.getImage() != null && !product.getImage().isBlank()){
                 Resource resource = fileServiceImp.load(product.getImage());
-                productDTO.setProductImage( request.getScheme()+"://"+request.getHeader("host") +"/file/"+ resource.getFilename());
+                productDTO.setImage( request.getScheme()+"://"+request.getHeader("host") +"/file/"+ resource.getFilename());
             }
 
             listProductDTO.add(productDTO);

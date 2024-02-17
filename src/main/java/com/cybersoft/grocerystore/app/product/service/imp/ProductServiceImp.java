@@ -10,10 +10,6 @@ import java.util.List;
 public interface ProductServiceImp {
     void save(MultipartFile file, String name, float price , float originalPrice,float discountPercent , int idCategory,String unit,int quantity,double averageRating,String description);
 
-    List<ProductEntity> findAll();
-    List<ProductEntity> findAllByOrderByQuantity();
-    List<Integer> findAllGroupByProduct();
-
     ProductDTO getProductById(int id);
     List<ProductEntity> getAllProducts();
     List<ProductDTO> getBestSellerProductsByCategory(int idCategory,int topNumber);
