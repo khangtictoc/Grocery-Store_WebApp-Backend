@@ -15,6 +15,10 @@ public class CategoryService implements CategoryServiceImp {
 
     @Override
     public List<CategoryEntity> findAll() {
+
+
+
         return categoryRepository.findAll();
     }
+
 }
