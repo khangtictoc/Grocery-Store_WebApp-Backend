@@ -21,4 +21,8 @@ public class CategoryService implements CategoryServiceImp {
         return categoryRepository.findAll();
     }
 
+    public List<Integer> findAllCategoryOrderByBestSeller() {
+        return categoryRepository.findAllCategoryOrderByBestSeller();
+    }
+
 }

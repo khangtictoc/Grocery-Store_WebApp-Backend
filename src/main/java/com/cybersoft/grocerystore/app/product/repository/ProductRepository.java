@@ -11,4 +11,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Integer> {
 
+    List<ProductEntity> findAllByOrderByQuantity();
+    @Query("SELECT product.id FROM order_detail group by product.id order by sum(quantity) desc")
+    List<Integer> findAllGroupByProduct();
+
 }
