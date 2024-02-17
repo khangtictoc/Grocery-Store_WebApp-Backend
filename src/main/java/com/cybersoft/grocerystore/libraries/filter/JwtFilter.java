@@ -41,6 +41,8 @@ public class JwtFilter extends OncePerRequestFilter {
         String bearerToken = request.getHeader("Authorization");
         Optional<String> tokenOptional = Optional.ofNullable(bearerToken);
 
+//        String mytk = request.getCookies()[0].getValue();
+//        System.out.println("token: "+mytk);
         if(tokenOptional.isPresent()) {
             //var token1 = tokenOptional.stream().map(data -> data.replace("Bearer ",""));
             String token = tokenOptional.get().replace("Bearer ","");

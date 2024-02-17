@@ -15,9 +15,14 @@ public class CategoryService implements CategoryServiceImp {
 
     @Override
     public List<CategoryEntity> findAll() {
+
+
+
         return categoryRepository.findAll();
     }
+
     public List<Integer> findAllCategoryOrderByBestSeller() {
         return categoryRepository.findAllCategoryOrderByBestSeller();
     }
+
 }

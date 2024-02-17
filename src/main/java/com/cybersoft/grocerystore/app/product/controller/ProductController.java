@@ -4,6 +4,9 @@ import com.cybersoft.grocerystore.app.product.dto.ProductDTO;
 import com.cybersoft.grocerystore.app.product.entity.ProductEntity;
 import com.cybersoft.grocerystore.app.product.service.imp.ProductServiceImp;
 import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
+
+import com.fasterxml.jackson.databind.ser.Serializers;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.slf4j.Logger;
@@ -12,8 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/product")
@@ -77,6 +82,7 @@ public class ProductController {
     @GetMapping("getAllOrderByQuantity")
     public ResponseEntity<?> getAllOrderByQuantity(){
 
+
         List<Integer> ListOrderGroupBy = productServiceImp.findAllGroupByProduct();
         List<ProductEntity> listProduct = productServiceImp.findAllByOrderByQuantity();
         List<ProductDTO> listProductDTO = new ArrayList<>();
@@ -119,4 +125,34 @@ public class ProductController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable int id){
+        ProductDTO productDTO =productServiceImp.getProductById(id);
+
+        BaseResponse baseResponse = new BaseResponse(200,"",productDTO);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
+    @GetMapping("getall")
+    public ResponseEntity<?> getAllProduct(){
+        List<ProductEntity> listProduct =productServiceImp.getAllProducts();
+
+        BaseResponse baseResponse = new BaseResponse(200,"",listProduct);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
+    @GetMapping("getbestsalerproductsbycategory")
+    public ResponseEntity<?> getBestSellerProductsByCategory(@RequestParam int idCategory, @RequestParam int topNumber){
+
+        List<ProductDTO> listProduct = productServiceImp.getBestSellerProductsByCategory(idCategory, topNumber);
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(listProduct);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
 }

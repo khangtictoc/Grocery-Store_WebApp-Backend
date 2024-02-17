@@ -2,6 +2,7 @@ package com.cybersoft.grocerystore.app.payment.entity;
 
 import com.cybersoft.grocerystore.app.card.entity.UserCardEntity;
 import com.cybersoft.grocerystore.app.checkout.entity.CheckOutEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,10 +16,12 @@ public class PaymentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     @ManyToOne
     @JoinColumn(name="id_checkout")
     private CheckOutEntity checkOut;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_user_card")
     private UserCardEntity userCard;

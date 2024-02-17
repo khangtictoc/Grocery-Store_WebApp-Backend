@@ -1,5 +1,6 @@
 package com.cybersoft.grocerystore.app.product.dto;
 
+
 import com.cybersoft.grocerystore.app.category.entity.CategoryEntity;
 import com.cybersoft.grocerystore.app.order.entity.OrderDetailEntity;
 import jakarta.persistence.Column;
