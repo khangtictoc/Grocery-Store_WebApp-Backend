@@ -164,7 +164,7 @@ public class ProductService implements ProductServiceImp {
             productDTO.setPrice(product.getPrice());
             productDTO.setUnit(product.getUnit());
             productDTO.setDescription(product.getDescription());
-            productDTO.setName(product.getCategory().getName());
+            productDTO.setCategoryId(product.getCategory().getId());
 
             if(product.getImage() != null && !product.getImage().isBlank()){
                 Resource resource = fileServiceImp.load(product.getImage());

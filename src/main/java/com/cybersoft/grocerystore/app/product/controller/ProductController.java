@@ -47,8 +47,6 @@ public class ProductController {
     }
     @GetMapping("getByCategory")
     public ResponseEntity<?> getAllByCategory(@RequestParam int categoryId){
-
-
         List<ProductEntity> listProduct = productRepository.findAll();
         List<ProductDTO> listProductDTO = new ArrayList<>();
 
@@ -85,8 +83,6 @@ public class ProductController {
     }
     @GetMapping("getAllOrderByQuantity")
     public ResponseEntity<?> getAllOrderByQuantity(){
-
-
         List<Integer> ListOrderGroupBy = productRepository.findAllGroupByProduct();
         List<ProductEntity> listProduct = productRepository.findAllByOrderByQuantity();
         List<ProductDTO> listProductDTO = new ArrayList<>();
@@ -115,9 +111,6 @@ public class ProductController {
             }
         }
 
-
-
-
         BaseResponse baseResponse = new BaseResponse(
                 200,
                 "Retrieve all category successfully",
@@ -127,7 +120,6 @@ public class ProductController {
         logger.info("Kiem tra: "+baseResponse);
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
-
     }
 
     @GetMapping("/id/{id}")
