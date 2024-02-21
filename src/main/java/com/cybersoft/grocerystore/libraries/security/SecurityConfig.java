@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/file/**","/error", "/jwt/**",
+                        .requestMatchers("/file/**","/error", "/jwt/**","role/**","category/**","product/**","user/**",
                                 "/product/getbestsalerproductsbycategory", "/product/id/*", "/product/getByCategory", "/product/getAllOrderByQuantity",
                                 "/user/signin", "/user/signup",
                                 "/category/getall")

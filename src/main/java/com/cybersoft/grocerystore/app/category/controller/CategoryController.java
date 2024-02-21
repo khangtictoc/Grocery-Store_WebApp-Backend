@@ -3,16 +3,15 @@ package com.cybersoft.grocerystore.app.category.controller;
 
 
 import com.cybersoft.grocerystore.libraries.payload.response.BaseResponse;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,31 @@ public class CategoryController {
     @Autowired
     HttpServletRequest request;
     private Logger logger = LoggerFactory.getLogger(CategoryController.class);
+
+    @GetMapping("add")
+    public ResponseEntity<?> addCategory(@RequestParam String name){
+        categoryServiceImp.add(name);
+        return new ResponseEntity<>("Add category successfully",HttpStatus.OK);
+    }
+    @GetMapping("updatebyid")
+    public ResponseEntity<?> updateCategoryById(@RequestParam int id,@RequestParam String name){
+        categoryServiceImp.updateCategoryById(id,name);
+        return new ResponseEntity<>("Update category successfully",HttpStatus.OK);
+    }
+    @GetMapping("deletebyid")
+    public ResponseEntity<?> deleteCategoryById(@RequestParam int id){
+        categoryServiceImp.deleteCategoryById(id);
+        return new ResponseEntity<>("Delete category successfully",HttpStatus.OK);
+    }
+
+    @GetMapping("getbyid")
+    public ResponseEntity<?> getById(@RequestParam int id){
+
+        CategoryEntity category = categoryServiceImp.findCategoryById(id);
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(category);
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
 
     @GetMapping("getall")
     public ResponseEntity<?> getAllCategory(){
