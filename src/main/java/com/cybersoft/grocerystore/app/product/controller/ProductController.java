@@ -31,6 +31,28 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
+
+
+    @PostMapping("updatebyid")
+    public ResponseEntity<?> updateProduct(@RequestParam int id,
+                                           @RequestParam MultipartFile file,
+                                           @RequestParam String name,
+                                           @RequestParam float price ,
+                                           @RequestParam float originalPrice,
+                                           @RequestParam float discountPercent ,
+                                           @RequestParam int idCategory,
+                                           @RequestParam(required = false) String unit,
+                                           @RequestParam int quantity,
+                                           @RequestParam double averageRating,
+                                           @RequestParam(required = false) String description,
+                                           @RequestParam(required = false) boolean isActivated
+                                           ){
+
+        productServiceImp.updateProductById(id,file, name, price, originalPrice, discountPercent, idCategory, unit, quantity, averageRating, description, isActivated);
+        return new ResponseEntity<>("update product successfully", HttpStatus.OK);
+    }
+
+
     @PostMapping("insert")
     public ResponseEntity<?> insertProduct(@RequestParam MultipartFile file,
                                            @RequestParam String name,
@@ -110,7 +132,6 @@ public class ProductController {
 
             }
         }
-
         BaseResponse baseResponse = new BaseResponse(
                 200,
                 "Retrieve all category successfully",

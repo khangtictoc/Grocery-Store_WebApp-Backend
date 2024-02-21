@@ -144,7 +144,6 @@ public class ProductService implements ProductServiceImp {
             }
         });
 
-
         // Create a LinkedHashMap to maintain the order of the sorted entries
         //Map<ProductEntity, Integer> sortedMap = new LinkedHashMap<>();
         for (Map.Entry<ProductEntity, Integer> entry : entryList) {
@@ -177,4 +176,37 @@ public class ProductService implements ProductServiceImp {
         return listProductDTO;
 
     }
+
+
+    @Override
+    public void updateProductById(int id, MultipartFile file, String name, float price, float originalPrice, float discountPercent, int idCategory, String unit, int quantity, double averageRating, String description, boolean isActivated) {
+
+        ProductDTO productDTO = getProductById(id);
+
+        fileServiceImp.save(file);
+        CategoryEntity category = new CategoryEntity();
+        category.setId(idCategory);
+
+        ProductEntity product = new ProductEntity();
+        product.setId(productDTO.getId());
+        product.setName(name);
+        product.setPrice(price);
+        product.setOriginalPrice(originalPrice);
+        product.setDiscountPercent(discountPercent);
+        product.setCategory(category);
+        product.setImage(file.getOriginalFilename());
+        product.setUnit(unit);
+        product.setQuantity(quantity);
+        product.setAverageRating(averageRating);
+        product.setDescription(description);
+        product.setActivated(isActivated);
+        try{
+            productRepository.save(product);
+        }catch(Exception e){
+            throw new RuntimeException("Loi update product: "+e.getMessage());
+        }
+
+    }
+
+
 }

@@ -14,4 +14,8 @@ public interface ProductServiceImp {
     List<ProductEntity> getAllProducts();
     List<ProductDTO> getBestSellerProductsByCategory(int idCategory,int topNumber);
 
+
+    void updateProductById(int id, MultipartFile file, String name, float price , float originalPrice,float discountPercent , int idCategory,String unit,int quantity,double averageRating,String description, boolean isActivated);
+
+
 }
