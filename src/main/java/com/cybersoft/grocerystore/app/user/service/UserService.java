@@ -7,6 +7,7 @@ import com.cybersoft.grocerystore.app.user.entity.UserEntity;
 import com.cybersoft.grocerystore.app.user.repository.UserRepository;
 import com.cybersoft.grocerystore.app.user.service.imp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class UserService implements UserServiceImp {
     @Autowired
     private RoleServiceImp roleServiceImp;
 
-    @Autowired
+    @Lazy
     private PasswordEncoder passwordEncoder;
     @Override
     public void add(String username, String rawPassword, String email, String phoneNumber, int idRole, String fullName, String avatar) {
