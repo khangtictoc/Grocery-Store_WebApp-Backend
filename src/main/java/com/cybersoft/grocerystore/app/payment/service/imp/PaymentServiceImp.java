@@ -8,4 +8,8 @@ import java.util.List;
 public interface PaymentServiceImp {
 
     List<PaymentDTO> completedPayments();
+    void add(int idCheckOut,String paymentMethod,boolean isPaid);
+    void addByIdUser(int idUser,String paymentMethod,boolean isPaid);
+
+
 }

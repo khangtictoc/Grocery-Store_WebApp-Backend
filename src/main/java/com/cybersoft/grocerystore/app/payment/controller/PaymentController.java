@@ -11,9 +11,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,24 @@ public class PaymentController {
         baseResponse.setData(listPaymentDTO);
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
+
+    @PostMapping("add")
+    public ResponseEntity<?> add(@RequestParam int idCheckOut,@RequestParam String paymentMethod,@RequestParam boolean isPaid){
+
+       paymentServiceImp.add(idCheckOut,paymentMethod,isPaid);
+
+        return new ResponseEntity<>("add payment successfully", HttpStatus.OK);
+    }
+
+
+    @PostMapping("addbyiduser")
+    public ResponseEntity<?> addByIdUser(@RequestParam int idUser,@RequestParam String paymentMethod,@RequestParam boolean isPaid){
+
+        paymentServiceImp.add(idUser,paymentMethod,isPaid);
+
+        return new ResponseEntity<>("add payment by id user successfully", HttpStatus.OK);
     }
 
 
