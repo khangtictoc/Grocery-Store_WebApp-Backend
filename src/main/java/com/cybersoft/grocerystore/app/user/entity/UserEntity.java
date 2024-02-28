@@ -39,7 +39,7 @@ public class UserEntity {
     @Column(name="password")
     private String password;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne()
     @JoinColumn(name="id_role")
     private RoleEntity role;
