@@ -67,9 +67,11 @@ public class OrderService implements OrderServiceImp {
     @Override
     public void add(int idProduct, int idUser, float purchasePrice, int quantity) {
         ProductDTO productDTO = productServiceImp.getProductById(idProduct);
+
         ProductEntity product = new ProductEntity();
         product.setId(productDTO.getId());
         product.setName(productDTO.getName());
+        System.out.println("Kiem tra categoryid = "+productDTO.getCategoryId());
         product.setCategory(categoryServiceImp.findCategoryById(productDTO.getCategoryId()));
         product.setImage(productDTO.getImage());
         product.setAverageRating(productDTO.getAverageRating());

@@ -23,6 +23,7 @@ public class UserService implements UserServiceImp {
     private RoleServiceImp roleServiceImp;
 
     @Lazy
+    @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
     public void add(String username, String rawPassword, String email, String phoneNumber, int idRole, String fullName, String avatar) {
