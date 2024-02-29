@@ -45,9 +45,9 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/file/**","/error", "/jwt/**","role/**","category/**","product/**","user/**","order/**","checkout/**","payment/**",
-                                "/product/getbestsalerproductsbycategory", "/product/id/*", "/product/getByCategory", "/product/getAllOrderByQuantity",
+                                "/product/getbestsalerproductsbycategory", "/product/**", "/product/getByCategory", "/product/getAllOrderByQuantity",
                                 "/user/signin", "/user/signup",
-                                "/category/getall")
+                                "/category/**")
                         .permitAll()
                         .requestMatchers("/user/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()

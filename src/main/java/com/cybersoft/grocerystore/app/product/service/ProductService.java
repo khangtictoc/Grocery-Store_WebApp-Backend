@@ -83,7 +83,7 @@ public class ProductService implements ProductServiceImp {
             productDTO.setUnit(product.getUnit());
             productDTO.setDescription(product.getDescription());
             productDTO.setPrice(product.getPrice());
-            productDTO.setCategoryId(product.getId());
+            productDTO.setCategoryId(product.getCategory().getId());
             productDTO.setActivated(product.isActivated());
             productDTO.setAverageRating(product.getAverageRating());
             productDTO.setImage(product.getImage());
