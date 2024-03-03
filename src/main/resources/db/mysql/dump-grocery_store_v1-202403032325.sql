@@ -26,7 +26,7 @@ CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Branded Foods'),(2,'Households');
+INSERT INTO `category` VALUES (1,'Branded Foods'),(2,'Households'),(3,'Vegetables'),(4,'Fruits'),(5,'Kitchen'),(6,'Short Codes'),(7,'Beverages'),(8,'Soft Drinks'),(9,'Juices'),(10,'Pet Food'),(11,'Frozen Foods'),(12,'Frozen Snacks'),(13,'Frozen Nonveg'),(14,'Bread & Bakery');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `checkout` (
   PRIMARY KEY (`id`),
   KEY `FK_id_user_checkout` (`id_user`),
   CONSTRAINT `FK_id_user_checkout` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `checkout` (
 
 LOCK TABLES `checkout` WRITE;
 /*!40000 ALTER TABLE `checkout` DISABLE KEYS */;
-INSERT INTO `checkout` VALUES (1,1,'Home',20,'Nguyễn Văn A','090900101010','Landmark 81','Hồ Chí Mình','2024-01-06 09:16:28','1,2');
+INSERT INTO `checkout` VALUES (1,1,'Home',20,'Nguyễn Văn A','090900101010','Landmark 81','Hồ Chí Mình','2024-01-06 09:16:28','1,2'),(2,1,'Home',20,'Nguyễn Văn A','090900101010','Landmark 82','Hồ Chí Mình','2024-02-18 08:04:48','3'),(3,1,'Office',15,'Nguyễn Văn A','090900101010','Gigamall','Hồ Chí Mình','2024-02-18 08:07:03','4'),(4,1,'Office',27,'Nguyễn Văn A','090900101010','Gigamall','Hồ Chí Mình','2024-02-18 08:07:03','5'),(5,1,'Office',100,'Nguyễn Văn A','090900101010','Sai Gon Center','Hồ Chí Mình','2024-02-18 08:07:32','6');
 /*!40000 ALTER TABLE `checkout` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `order_detail` (
   KEY `FK_id_user_order_detail` (`id_user`),
   CONSTRAINT `FK_id_product_order_detail` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`),
   CONSTRAINT `FK_id_user_order_detail` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,1,1,3,5,'2024-01-06 09:13:57',1),(2,2,1,5,1,'2024-01-06 09:14:12',1);
+INSERT INTO `order_detail` VALUES (1,1,1,3,5,'2024-01-06 09:13:57',1),(2,2,1,5,1,'2024-01-06 09:14:12',1),(3,4,1,8,1,'2024-02-18 05:17:45',1),(4,3,1,3,2,'2024-02-18 05:17:45',1),(5,6,1,11,1,'2024-02-18 05:17:45',1),(6,7,1,9,3,'2024-02-18 05:17:45',1),(7,8,1,7,10,'2024-02-18 05:17:45',1),(8,9,1,8,1,'2024-02-18 05:17:45',1),(9,10,1,5,1,'2024-02-18 05:17:45',1);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `payment` (
   KEY `FK_id_user_card_payment` (`id_user_card`),
   CONSTRAINT `FK_id_checkout_payment` FOREIGN KEY (`id_checkout`) REFERENCES `checkout` (`id`),
   CONSTRAINT `FK_id_user_card_payment` FOREIGN KEY (`id_user_card`) REFERENCES `user_card` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,1,'COD',NULL,'2024-01-06 09:35:47',1);
+INSERT INTO `payment` VALUES (1,1,'COD',NULL,'2024-01-06 09:35:47',1),(2,2,'COD',NULL,'2024-02-18 08:14:50',1),(3,3,'CIA',NULL,'2024-02-18 08:16:01',1),(4,4,'CIA',NULL,'2024-02-18 08:16:01',1),(5,5,'CIA',NULL,'2024-02-18 08:16:01',1);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +161,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `FK_id_category_product` (`id_category`),
   CONSTRAINT `FK_id_category_product` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +170,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,1,NULL,'Knor Instant Soup','100 Gram',3,5000,4.5,NULL,5,NULL,1),(2,1,NULL,'Chings Noodles ','75 Gram',5,8,4.7,NULL,8,NULL,1);
+INSERT INTO `products` VALUES (1,1,'knor_instant_soup.jpg','Knor Instant Soup','100 Gram',3,5000,4.5,NULL,5,0,1),(2,1,'Chings_Noodles.jpg','Chings Noodles ','75 Gram',5,8,4.7,NULL,8,0,1),(3,1,'maggie_instant_noodles.jpg','Maggi Instant Noodles','80 Gram',5,194,3.8,NULL,6,0,1),(4,1,NULL,'Yippee Noodles','70 Gram',7,192,4.1,NULL,5,0,1),(5,1,NULL,'Top Ramen Noodles','85 Gram',4,374,4.9,NULL,7,0,1),(6,1,'Sunfeast_Yippee_Magic_Masala_Noodles.jpg','Sunfeast Yippee Magic Masala Noodles','80 Gram',9,237,3.6,NULL,6,0,1),(7,1,'Maggi_2_Minute_Noodles.jpg','Maggi 2-Minute Noodles','70 Gram',8,185,4.3,NULL,5,0,1),(8,1,NULL,'Wai Wai Instant Noodles','75 Gram',6,286,3.5,NULL,4,0,1),(9,1,NULL,'Nissin Cup Noodles','60 Gram',9,328,4.8,NULL,7,0,1),(10,1,NULL,'Knorr Chinese Noodles','90 Gram',7,444,4.7,NULL,8,0,1);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `roles` (
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'ROLE_ADMIN',NULL),(2,'ROLE_USER',NULL);
+INSERT INTO `roles` VALUES (1,'ROLE_ADMIN',NULL),(2,'ROLE_USER',NULL),(5,'ROLE_MARKETING','For telesale, saler and broker');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `FK_id_roles_users` (`id_role`),
   CONSTRAINT `FK_id_roles_users` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'nguyenvana@gmail.com','$2a$12$ierwwFEE1T2rfNwUyvDLfe4He7QYYg1Bdii.32aD7w42Javo7Zs2C',2,'Nguyễn Văn A',NULL,NULL,1,'2024-01-06 09:13:00');
+INSERT INTO `users` VALUES (1,NULL,'nguyenvana@gmail.com','$2a$12$ierwwFEE1T2rfNwUyvDLfe4He7QYYg1Bdii.32aD7w42Javo7Zs2C',2,'Nguyễn Văn A',NULL,NULL,1,'2024-01-06 09:13:00'),(2,NULL,'khang@gmail.com','$2a$12$n4B.Mg7zZeohyYuUk2D4sOk1d6f6AL4OdL04Ka9m9UBWuGbn7tr.u',1,NULL,NULL,NULL,1,'2024-01-20 17:30:11'),(4,'khangtictoc','danh@gmail.com','$2a$10$lMHTQl4hxRYvdwtzTqjEMesTq5z2d4CTdFAMNbr7bN4RZze87NvAu',2,NULL,NULL,'1234567890',0,NULL),(10,'test','godknowwhere@gmail.com','$2a$10$gxt1wPmEIzyNI0caFWQQLO7FtBiKyO8Uos9jIj2KoZBwOogNFc1Om',1,'test','test','123',1,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-15 23:32:51
+-- Dump completed on 2024-03-03 23:25:05
