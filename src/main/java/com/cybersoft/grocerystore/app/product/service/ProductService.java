@@ -190,7 +190,10 @@ public class ProductService implements ProductServiceImp {
 
         ProductDTO productDTO = getProductById(id);
 
-        fileServiceImp.save(file);
+        if (file != null) {
+            fileServiceImp.save(file);
+        }
+
         CategoryEntity category = new CategoryEntity();
         category.setId(idCategory);
 
@@ -201,7 +204,8 @@ public class ProductService implements ProductServiceImp {
         product.setOriginalPrice(originalPrice);
         product.setDiscountPercent(discountPercent);
         product.setCategory(category);
-        product.setImage(file.getOriginalFilename());
+        if (file != null) product.setImage(file.getOriginalFilename());
+        else product.setImage(null);
         product.setUnit(unit);
         product.setQuantity(quantity);
         product.setAverageRating(averageRating);

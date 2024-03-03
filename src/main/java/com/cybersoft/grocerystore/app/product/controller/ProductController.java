@@ -35,13 +35,13 @@ public class ProductController {
 
     @PostMapping("updatebyid")
     public ResponseEntity<?> updateProduct(@RequestParam int id,
-                                           @RequestParam MultipartFile file,
+                                           @RequestParam(required = false) MultipartFile file,
                                            @RequestParam String name,
                                            @RequestParam float price ,
                                            @RequestParam float originalPrice,
                                            @RequestParam float discountPercent ,
                                            @RequestParam int idCategory,
-                                           @RequestParam(required = false) String unit,
+                                           @RequestParam String unit,
                                            @RequestParam int quantity,
                                            @RequestParam double averageRating,
                                            @RequestParam(required = false) String description,

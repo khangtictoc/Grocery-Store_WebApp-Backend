@@ -22,6 +22,7 @@ public class UserController {
     private UserRepository userRepository;
 
 
+    @CrossOrigin
     @PostMapping("add")
     public ResponseEntity<?> addUser(@RequestParam String username,@RequestParam String rawPassword,@RequestParam String email,@RequestParam String phoneNumber,@RequestParam int idRole,@RequestParam String fullName,@RequestParam String avatar){
 
@@ -30,6 +31,7 @@ public class UserController {
         return new ResponseEntity<>("Add user successfully", HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping("updatebyid")
     public ResponseEntity<?> updateUserById(@RequestParam int id,@RequestParam String username,@RequestParam String rawPassword,@RequestParam String email,@RequestParam String phoneNumber,@RequestParam int idRole,@RequestParam String fullName,@RequestParam String avatar,@RequestParam boolean isActivated){
 
@@ -49,7 +51,7 @@ public class UserController {
         return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
 
-
+    @CrossOrigin
     @GetMapping("getall")
     public ResponseEntity<?> getall(){
 
